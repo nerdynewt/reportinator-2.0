@@ -1,1 +1,3 @@
-asdf
+#!/bin/python
+
+print ("GRAPH")

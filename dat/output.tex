@@ -1,0 +1,238 @@
+
+\documentclass[a4paper]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{authblk}
+\usepackage{booktabs}
+\usepackage[shortlabels]{enumitem}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{graphicx}
+\setlength\headheight{15pt}
+\colorlet{headbgcolor}{orange}
+\usepackage[markcase=noupper]{scrlayer-scrpage}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{multirow}
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{hyperref}% add hypertext capabilities
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage[super]{nth}
+\clearpairofpagestyles
+%\automark[chapter]{chapter}
+%\renewcommand\chaptermarkformat{\chaptername\ \thechapter:\enskip}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\title{\textbf{Range of Alpha Particles}}
+\author{Vishnu Namboodiri (1711147)}
+\date{19 February 2020}
+
+\begin{document}
+
+\maketitle
+
+TABLE
+
+
+\section*{Objective}
+
+\begin{enumerate}
+\item To record the alpha spectrum of an Am-241 radioactive source at different pressures,
+\item And to record the energy loss of alpha particles as a function of pressure,
+\item And hence to determine the range of alpha radiation in air.
+\end{enumerate}
+
+
+
+\section*{Apparatus}
+
+
+
+\begin{itemize}
+\item Alpha spectroscopy chamber with vaccum pump
+\item Scintillation Detector
+\item Discriminator-preamplifier
+\item MCA Box
+\item HF Cables
+\item CASSY Lab software
+\end{itemize}
+
+
+\section*{Theory}
+
+
+Normal amplifiers, when amplifying weak signals, also amplifies the noise present in it. This noise incldes flicker noise at low frequencies which can be picked up from other electronics nearby, or thermal noise, which spans all frequencies and is of thermodynamic origin. Thsese noise signals can be ignored if we know the frequency of the signal we are looking for. This is what a lock-in amplifier does, extracting the signal given a known carrier wave.
+
+
+$$R=\int_{E_0}^{0} \frac{dx}{dE} \cdot dE \ dx$$
+
+$$R\propto E_0^{\frac{3}{2}}$$
+
+$$x=\frac{c}{c_0}\cdot x_0$$
+
+
+\subsubsection*{Determining Small Resistance}
+
+Measuring small resistances using conventional techniques can be tricky, since oftentimes, the resistance of the circuit itself can be higher than the resistance we are dealing with, which gives us a lot of noise. This can be solved by using lock-in amplifiers.
+
+Using an AC signal, at each frequency, we plot a graph between $V_{DC}$ and $V_{AC}$, and get the slope.
+
+Since $dV_{AC}=RdI_{AC}$m where R is the resistance of the primary circuit, and $dI_{AC}$ is the change in current through the low resistance when the signal generator voltage is changed by $dV_{AC}$. Also, the voltage $V_r$ changes by $dV_r$ where $dV_r=rdI_{AC}$. Therefore, we have:
+
+$$
+\frac{dV_{DC}}{dV_{AC}}=\mu \frac{r}{R}
+$$
+
+
+
+\subsubsection*{Determining Mutual Inductance}
+
+Changing magnetic fields induces electric fields. Therefore, when a coil of wire is connected to an oscillating voltage, the changing magnetic fields due to it can induce an emf in a coil placed neaby.
+
+Hence, if the current supplied to the primary coil is $ I=I_0sin(2\pi f t)$,
+then the emf induced in the secondary coil is obtained as:
+
+$$
+V=-M\frac{dI}{dt}= -2\pi Mft_0 sin(2\pi f t+\frac{\pi}{2})
+$$
+
+From above, it is evident that the induced current and the primary current are $90^o$ out of phase. Also, the induced current is directly proportional to the amplitude $I_0$ of the primary current, and it's frequency $f$.
+
+\section*{Observations}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{@{}cc@{}}
+\toprule
+Length (in cm) & Peak Channel No \\ \midrule
+26.4           & 291             \\
+76.9           & 230             \\
+155.8          & 174             \\ \bottomrule
+\end{tabular}
+\caption{Channel number against cable length}
+\end{center}
+\end{table}
+
+
+\begin{center}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.55]{Data/Capture1.png}
+\caption{Calibration Curves for Different Frequencies}
+\end{center}
+\end{figure}
+\end{center}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+Pressure (mBar) & Effective Distance (cm) & Energy (MeV) \\ \midrule
+40              & 0.067                   & 4946.3       \\
+140             & 0.235                   & 4697.2       \\
+240             & 0.403                   & 4483.7       \\
+340             & 0.571                   & 4270.1       \\
+440             & 0.738                   & 4056.6       \\
+540             & 0.906                   & 3807.5       \\
+640             & 1.074                   & 3558.5       \\
+740             & 1.242                   & 3327.2       \\
+840             & 1.410                   & 3006.9       \\
+940             & 1.577                   & 2668.8       \\ \bottomrule
+\end{tabular}
+\caption{Readings for distance 1.7cm}
+\end{center}
+\end{table}
+
+\begin{center}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.55]{Data/Capture2.png}
+\caption{Calibration Curves for Different Frequencies}
+\end{center}
+\end{figure}
+\end{center}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+Pressure (mBar) & Effective Distance (cm) & Energy (MeV) \\ \midrule
+60              & 0.219                   & 4661.6       \\
+140             & 0.511                   & 4287.9       \\
+240             & 0.877                   & 3807.5       \\
+340             & 1.242                   & 3220.4       \\
+440             & 1.607                   & 2668.8       \\
+540             & 1.972                   & 1761.4       \\
+640             & 2.338                   & 889.6        \\
+740             & 2.703                   & 213.5        \\ \bottomrule
+\end{tabular}
+\caption{Readings for distance 3.7cm}
+\end{center}
+\end{table}
+
+
+
+
+\section*{Graphs and Calculations}
+
+\begin{center}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.65]{Cable.png}
+\caption{Finding the channel number for zero cable length}
+\end{center}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.7]{Graph17.png}
+\caption{Peak energy against effective distance for 1.7cm}
+\end{center}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.7]{Graph37.png}
+\caption{Peak energy against effective distance for 1.7cm}
+\end{center}
+\end{figure}
+\end{center}
+
+
+\section*{Results}
+
+\begin{itemize}
+\item The amplification factor was obtained as: $\mu = 1.805 \times 10^3$
+\item The small resistance was obtained to be: $r =0.031\Omega$
+\item The mutual inductance of the given coil was obtained as: $M = 120.20 \mu H$
+\end{itemize}
+
+\section*{Conclusion}
+
+The functioning of a lock-in amplifier, and its use in extracting signal from noise using phase modulation of the reference signal was studied. These were used in obtaining the resistance of a given small resistance, and the mutual inductance of a given coil.
+
+
+
+\end{document}
+
+\end{document}
