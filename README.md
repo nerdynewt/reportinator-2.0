@@ -1,6 +1,6 @@
 # reportinator-2.0
 
-Makes your lab reports for you.
+Helps you with the monotonous parts of an undergrad LaTeX lab report, esp. if it involves drawing tables, plotting graphs and taking errors.
 
 *NOTE: In development. Prepare for dissapointments*
 
@@ -12,10 +12,10 @@ Clone the repo:
 git clone "https://github.com/nerdynewt/reportinator-2.0.git"
 ```
 
-Make a root folder for all your LaTeX projects:
+Set up a root folder for all your LaTeX projects:
 
 ```
-mkdir ~/Documents/Lab\ Reports/
+mkdir ~/Documents/Reports/
 ```
 
 Configure Reportinator:
@@ -25,13 +25,11 @@ cd reportinator-2.0
 ./main.sh
 ```
 
-This will run the configuration script. 
+This will run the configuration script. When prompted, enter the path to the root folder you just created.
 
 ## Usage
 
-- Set up a root folder: This is the folder where you'll be keeping all your LaTeX projects. ex. `$ mkdir ~/Documents/Lab\ Reports`
-
-- Make a folder inside the root folder (ex `$ mkdir ~/Documents/Lab\ Reports/Fabry-Perot`), and place one or more of the following files inside:
+- Make a folder inside the root folder (ex `$ mkdir ~/Documents/Reports/Fabry-Perot`), and place one or more of the following files inside:
 
   - A template file: this is your `.tex` file with ~placeholders~ in place of tables, graphs etc. See below for a list of supported placeholders. ex:
 
@@ -55,11 +53,11 @@ This will run the configuration script.
     template.tex
     ```
 
-  - Call `main.sh`: `$ ./path/to/reportinator-2.0/main.sh`
+- Call `main.sh`: `$ ./path/to/reportinator-2.0/main.sh`
 
-  - You will be asked to choose a Folder/Project. In this case, we will be choosing `Fabry-Perot`.
+- You will be asked to choose a Folder/Project. In this case, we will be choosing `Fabry-Perot`.
 
-  - If everything goes well, you will be greeted with your final `.tex` file in your favourite editor.
+- If everything goes well, you will be greeted with your final `.tex` file in your favourite editor.
 
   ## Default Modules
 
