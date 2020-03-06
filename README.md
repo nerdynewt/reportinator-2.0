@@ -25,16 +25,16 @@ cd reportinator-2.0
 ./main.sh
 ```
 
-This will run the configuration script. When prompted, enter the path to the root folder you just created.
+This will run the configuration script. When prompted, enter the path to the root folder you just created. (Remember to include the trailing slash)
 
 ## Usage
 
-- Make a folder inside the root folder (ex `$ mkdir ~/Documents/Reports/Fabry-Perot`), and place one or more of the following files inside:
+- Make a folder inside the root folder (ex `$ mkdir ~/Documents/Reports/Fabry-Perot/`), and place one or more of the following files inside:
 
-  - A template file: this is your `.tex` file with ~placeholders~ in place of tables, graphs etc. See below for a list of supported placeholders. ex:
+  - A template file: this is your `.tex` file (or a `.md` file)with ~placeholders~ in place of tables, graphs etc. See below for a list of supported placeholders. ex:
 
   - ```
-    $ cat ~/Documents/Lab Reports/Fabry-Perot/template.tex
+    $ cat ~/Documents/Reports/Fabry-Perot/template.tex
     ...
     \section{Observations}
     ~tables~
@@ -53,7 +53,7 @@ This will run the configuration script. When prompted, enter the path to the roo
     template.tex
     ```
 
-- Call `main.sh`: `$ ./path/to/reportinator-2.0/main.sh`
+- Call reportinator: `reportinator`
 
 - You will be asked to choose a Folder/Project. In this case, we will be choosing `Fabry-Perot`.
 

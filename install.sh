@@ -1,6 +1,19 @@
 #!/bin/bash
 
-source reportinator.conf
+
+
+if [ -f ~/.config/reportinator/reportinator.conf ]; then
+    source ~/.config/reportinator/reportinator.conf
+elif [ -f "reportinator.conf" ]; then
+		mkdir -p ~/.config/reportinator/
+		mv reportinator.conf ~/.config/reportinator/reportinator.conf
+		source ~/.config/reportinator/reportinator.conf
+else
+	echo "Can't find config file!"
+fi
+
+# source reportinator.conf
+# mkdir -p 
 
 
 if [[ $TEX_RECONFIG == "no" ]]; then
@@ -11,6 +24,14 @@ if [[ $TEX_RECONFIG == "no" ]]; then
         [Nn]* ) echo "Exiting..."; exit ;;
         * ) echo "Exiting..."; exit;;
 esac
+fi
+
+if [ -f "main.sh" ]; then
+	REP_ROOT=$(pwd)/
+else
+	echo "ERROR: You are not in the reportinator folder. Run this wizard from the reportinator-2.0 folder: cd /path/to/reportinator-2.0/"
+	echo "Exiting..."
+	exit
 fi
 
 
@@ -50,7 +71,6 @@ if [[ $TEX_RECONFIG == "yes" ]]; then
 	TEX_RECONFIG="no"
 fi
 
-echo $TEX_ROOT
 
 while read line; do
 	if [[ $line == "TEX_EDITOR"* ]]; then
@@ -61,10 +81,15 @@ while read line; do
 		echo "TEX_INPUT="$TEX_INPUT >> temp.conf
 	elif [[ $line == "TEX_RECONFIG"* ]]; then
 		echo "TEX_RECONFIG="$TEX_RECONFIG >> temp.conf	
+	elif [[ $line == "REP_ROOT"* ]]; then
+		echo "REP_ROOT="$REP_ROOT >> temp.conf	
 	else
 		echo $line >> temp.conf
 	fi
-done < reportinator.conf
+done < ~/.config/reportinator/reportinator.conf
 
-cat temp.conf > reportinator.conf
+cat temp.conf > ~/.config/reportinator/reportinator.conf
 rm temp.conf
+
+
+ln -snf $REP_ROOT"main.sh"  /usr/local/bin/reportinator

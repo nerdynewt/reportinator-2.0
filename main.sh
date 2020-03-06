@@ -1,6 +1,20 @@
 #!/bin/bash
 
-source reportinator.conf
+if test -f "reportinator.conf"; then
+    source reportinator.conf
+    echo "Peforming initial setup..."
+	sleep 1
+	bash install.sh
+	echo "Initialization complete! You're ready to use Reportinator now."
+	echo "Press any key"
+	read -n 1
+	exit
+fi
+
+source ~/.config/reportinator/reportinator.conf
+
+# CURRENT_FOLDER=$(pwd)
+cd $REP_ROOT
 
 while getopts ":ahc" opt; do
   case $opt in
@@ -46,14 +60,27 @@ else
     esac
 fi
 
-if [[ "$(ls $PROJECT_FOLDER | grep -o .tex  | wc -l)" -eq 0 ]]; then
+if [[ "$(ls $PROJECT_FOLDER | grep -o ".tex\|.md"  | wc -l)" -eq 0 ]]; then
 	echo "No template file found. Using built-in template."
-elif [[ "$(ls $PROJECT_FOLDER | grep -o .tex  | wc -l)" -eq 1 ]]; then
+elif [[ "$(ls $PROJECT_FOLDER | grep -o ".tex"  | wc -l)" -eq 1 ]]; then
 	echo "Found a template file." 
 	cp $PROJECT_FOLDER/*.tex modules/dat/template.tex
 else 
-	TEMPLATE=$(ls $PROJECT_FOLDER | grep .tex | fzf --header="Found more than one tex file. Choose one to use as template.")
-	cp $PROJECT_FOLDER/$TEMPLATE modules/dat/template.tex
+	TEMPLATE=$(ls $PROJECT_FOLDER | grep ".tex\|md" | fzf --header="Found more than one tex file. Choose one to use as template.")
+	if [[ $TEMPLATE == *".md" ]]; then
+		cp $PROJECT_FOLDER/$TEMPLATE modules/dat/template.md
+		bash modules/mdtex.sh modules/dat/template.md modules/dat/template.tex
+		while read -r line; do
+			if [[ $line == "\textsubscript"* ]]; then
+				line=${line//\\textsubscript\{/\~}
+				line=${line//\}/\~}
+			fi
+			printf "%s\n" "$line" >> modules/dat/template2.tex
+		done <modules/dat/template.tex	
+		cp modules/dat/template2.tex modules/dat/template.tex
+	else
+		cp $PROJECT_FOLDER/$TEMPLATE modules/dat/template.tex
+	fi
 fi
 
 echo "" > modules/dat/output.tex
@@ -88,9 +115,6 @@ cp -r modules/dat/ $PROJECT_FOLDER/
 # printf 'hello\r'
 
 echo "Process Complete, opening TeX file..."
+# cd $CURRENT_FOLDER
 sleep 0.3
 $TEX_EDITOR $PROJECT_FOLDER/output.tex 
-
-#TODO set root folder variable in config
-
-
